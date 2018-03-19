@@ -1,0 +1,75 @@
+{
+  "name": "@pnpm/link-bins",
+  "version": "0.0.0",
+  "description": "Link bins to node_modules/.bin",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "lint": "tslint -c tslint.json --project .",
+    "tsc": "rimraf lib && tsc",
+    "test": "npm run lint && preview && ts-node test --type-check && mos t",
+    "md": "mos",
+    "prepublishOnly": "npm run tsc",
+    "fix": "tslint -c tslint.json --project . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnpm/link-bins.git"
+  },
+  "keywords": [
+    "pnpm",
+    "bin"
+  ],
+  "author": "Zoltan Kochan <z@kochan.io> (https://www.kochan.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pnpm/link-bins/issues"
+  },
+  "homepage": "https://github.com/pnpm/link-bins#readme",
+  "peerDependencies": {
+    "@pnpm/logger": "^1.0.0"
+  },
+  "dependencies": {
+    "@pnpm/package-bins": "^1.0.0",
+    "@pnpm/types": "^1.7.0",
+    "@types/mz": "^0.0.32",
+    "@types/ramda": "^0.25.20",
+    "@zkochan/cmd-shim": "^2.2.4",
+    "arr-flatten": "^1.1.0",
+    "is-windows": "^1.0.2",
+    "mkdirp-promise": "^5.0.1",
+    "mz": "^2.7.0",
+    "normalize-path": "^2.1.1",
+    "p-filter": "^1.0.0",
+    "ramda": "^0.25.0",
+    "read-package-json": "^2.0.13",
+    "tempy": "^0.2.1"
+  },
+  "devDependencies": {
+    "@pnpm/logger": "^1.0.1",
+    "@types/tape": "^4.2.31",
+    "mos": "^2.0.0-alpha.3",
+    "mos-plugin-readme": "^1.0.4",
+    "package-preview": "^1.0.1",
+    "path-exists": "^3.0.0",
+    "rimraf": "^2.6.2",
+    "tape": "^4.8.0",
+    "ts-node": "^5.0.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1"
+  },
+  "mos": {
+    "plugins": [
+      "readme"
+    ],
+    "installation": {
+      "useShortAlias": true
+    }
+  }
+}
