@@ -1,7 +1,9 @@
 dependencies:
+  '@pnpm/link-bins': 'link:../__package_previews__/link-bins/@pnpm/link-bins'
   '@pnpm/package-bins': 1.0.0
   '@pnpm/types': 1.7.0
   '@types/mz': 0.0.32
+  '@types/node': 9.6.5
   '@types/ramda': 0.25.22
   '@zkochan/cmd-shim': 2.2.4
   arr-flatten: 1.1.0
@@ -14,7 +16,9 @@ dependencies:
   read-package-json: 2.0.13
 devDependencies:
   '@pnpm/logger': 1.0.1
+  '@types/path-exists': 3.0.0
   '@types/tape': 4.2.32
+  '@types/tempy': 0.1.0
   mos: 2.0.0-alpha.3
   mos-plugin-readme: 1.0.4
   package-preview: 1.0.5
@@ -93,6 +97,10 @@ packages:
   /@types/node/9.6.5:
     resolution:
       integrity: sha512-NOLEgsT6UiDTjnWG5Hd2Mg25LRyz/oe8ql3wbjzgSFeRzRROhPmtlsvIrei4B46UjERF0td9SZ1ZXPLOdcrBHg==
+  /@types/path-exists/3.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-ApUp/Eo/D4lQ/8yI+dlNVz1LslAdvycBbKmsr77sw2Ovymyj0nYowS+xuTChzfGdnEdcqBTPM2OtKmvTFKIXPA==
   /@types/ramda/0.25.22:
     dev: false
     resolution:
@@ -103,6 +111,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-xil0KO5wkPoixdBWGIGolPv9dekf6dVkjjJLAFYchfKcd4DICou67rgGCIO7wAh3i5Ff/6j9IDgZz+GU9cMaqQ==
+  /@types/tempy/0.1.0:
+    dev: true
+    resolution:
+      integrity: sha512-2qeSxI2bMucW58Jsj8jrBXZxobtcKkvO44AvJzKGaD8+m/3KRuBqeKitJ5U6sqy3a9tFsqhzsxMkqR4Wcl6AmQ==
   /@types/write-json-file/2.2.1:
     dev: true
     resolution:
@@ -3079,8 +3091,11 @@ specifiers:
   '@pnpm/package-bins': ^1.0.0
   '@pnpm/types': ^1.7.0
   '@types/mz': ^0.0.32
+  '@types/node': ^9.6.5
+  '@types/path-exists': ^3.0.0
   '@types/ramda': ^0.25.20
   '@types/tape': ^4.2.31
+  '@types/tempy': ^0.1.0
   '@zkochan/cmd-shim': ^2.2.4
   arr-flatten: ^1.1.0
   is-windows: ^1.0.2

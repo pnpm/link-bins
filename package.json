@@ -39,6 +39,7 @@
     "@pnpm/package-bins": "^1.0.0",
     "@pnpm/types": "^1.7.0",
     "@types/mz": "^0.0.32",
+    "@types/node": "^9.6.5",
     "@types/ramda": "^0.25.20",
     "@zkochan/cmd-shim": "^2.2.4",
     "arr-flatten": "^1.1.0",
@@ -52,7 +53,9 @@
   },
   "devDependencies": {
     "@pnpm/logger": "^1.0.1",
+    "@types/path-exists": "^3.0.0",
     "@types/tape": "^4.2.31",
+    "@types/tempy": "^0.1.0",
     "mos": "^2.0.0-alpha.3",
     "mos-plugin-readme": "^1.0.4",
     "package-preview": "^1.0.1",
