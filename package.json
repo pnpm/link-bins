@@ -39,7 +39,7 @@
     "@pnpm/package-bins": "^1.0.0",
     "@pnpm/types": "^1.7.0",
     "@types/mz": "^0.0.32",
-    "@types/node": "^9.6.5",
+    "@types/node": "^9.6.5 || 10",
     "@types/ramda": "^0.25.20",
     "@zkochan/cmd-shim": "^2.2.4",
     "arr-flatten": "^1.1.0",
