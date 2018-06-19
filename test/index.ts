@@ -6,12 +6,13 @@ import tempy = require('tempy')
 import fs = require('mz/fs')
 
 const fixtures = path.join(__dirname, 'fixtures')
+const simpleFixture = path.join(fixtures, 'simple-fixture')
 
 test('linkBins()', async (t) => {
   const binTarget = tempy.directory()
   t.comment(`linking bins to ${binTarget}`)
 
-  await linkBins(path.join(fixtures, 'node_modules'), binTarget)
+  await linkBins(path.join(simpleFixture, 'node_modules'), binTarget)
 
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
@@ -24,7 +25,7 @@ test('linkPackageBins()', async (t) => {
   const binTarget = tempy.directory()
   t.comment(`linking bins to ${binTarget}`)
 
-  await linkPackageBins(path.join(fixtures, 'node_modules/simple'), binTarget)
+  await linkPackageBins(path.join(simpleFixture, 'node_modules/simple'), binTarget)
 
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
