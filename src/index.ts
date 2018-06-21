@@ -1,5 +1,5 @@
 import logger from '@pnpm/logger'
-import binify from '@pnpm/package-bins'
+import binify, {Command} from '@pnpm/package-bins'
 import {PackageJson} from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
 import isWindows = require('is-windows')
@@ -16,38 +16,87 @@ const IS_WINDOWS = isWindows()
 
 export default async (modules: string, binPath: string, exceptPkgName?: string) => {
   const pkgDirs = await getPkgDirs(modules)
-  return Promise.all(
-    pkgDirs
-      .map((pkgDir) => normalizePath(pkgDir))
-      .filter((pkgDir) => !exceptPkgName || !pkgDir.endsWith(`/${exceptPkgName}`))
-      .map((pkgDir: string) => linkPackageBins(pkgDir, binPath)),
+  const allCmds = R.unnest(
+    (await Promise.all(
+      pkgDirs
+        .map(normalizePath)
+        .filter((pkgDir: string) => !exceptPkgName || !pkgDir.endsWith(`/${exceptPkgName}`))
+        .map(getPackageBins),
+    ))
+    .filter((cmds: Command[]) => cmds.length),
   )
+
+  return linkBins(allCmds, binPath)
 }
 
-/**
- * Links executable into `node_modules/.bin`.
- */
-export async function linkPackageBins (target: string, binPath: string) {
+export async function linkBinsOfPackages (
+  pkgs: Array<{
+    manifest: PackageJson,
+    location: string,
+  }>,
+  binsTarget: string,
+) {
+  if (!pkgs.length) return
+
+  const allCmds = R.unnest(
+    (await Promise.all(
+      pkgs
+        .map((pkg) => getPackageBinsFromPackageJson(pkg.manifest, pkg.location)),
+    ))
+    .filter((cmds: Command[]) => cmds.length),
+  )
+
+  return linkBins(allCmds, binsTarget)
+}
+
+async function linkBins (
+  allCmds: Array<Command & {
+    ownName: boolean,
+    pkgName: string,
+  }>,
+  binPath: string,
+) {
+  if (!allCmds.length) return
+
+  await mkdirp(binPath)
+
+  const [cmdsWithOwnName, cmdsWithOtherNames] = R.partition((cmd) => cmd.ownName, allCmds)
+
+  await Promise.all(cmdsWithOwnName.map((cmd: Command) => linkBin(cmd, binPath)))
+
+  const usedNames = R.fromPairs(cmdsWithOwnName.map((cmd) => [cmd.name, cmd.name] as R.KeyValuePair<string, string>))
+  await Promise.all(cmdsWithOtherNames.map((cmd: Command & {pkgName: string}) => {
+    if (usedNames[cmd.name]) {
+      logger.warn(`Cannot link bin "${cmd.name}" of "${cmd.pkgName}" to "${binPath}". A package called "${usedNames[cmd.name]}" already has its bin linked.`)
+      return
+    }
+    usedNames[cmd.name] = cmd.pkgName
+    return linkBin(cmd, binPath)
+  }))
+}
+
+async function getPackageBins (target: string) {
   const pkg = await safeReadPkg(path.join(target, 'package.json'))
 
   if (!pkg) {
     logger.warn(`There's a directory in node_modules without package.json: ${target}`)
-    return
+    return []
   }
 
-  const cmds = await binify(pkg, target)
-
-  if (!cmds.length) return
-
-  await mkdirp(binPath)
-  await Promise.all(cmds.map(async (cmd) => {
-    const externalBinPath = path.join(binPath, cmd.name)
-
-    const nodePath = (await getBinNodePaths(target)).join(path.delimiter)
-    return cmdShim(cmd.path, externalBinPath, {nodePath})
-  }))
+  return getPackageBinsFromPackageJson(pkg, target)
 }
 
+async function getPackageBinsFromPackageJson (pkgJson: PackageJson, pkgPath: string) {
+  const cmds = await binify(pkgJson, pkgPath)
+  return cmds.map((cmd) => ({...cmd, ownName: cmd.name === pkgJson.name, pkgName: pkgJson.name}))
+}
+
+async function linkBin (cmd: Command, binPath: string) {
+  const externalBinPath = path.join(binPath, cmd.name)
+
+  const nodePath = (await getBinNodePaths(cmd.path)).join(path.delimiter)
+  return cmdShim(cmd.path, externalBinPath, {nodePath})
+}
 async function getBinNodePaths (target: string) {
   const targetRealPath = await fs.realpath(target)
 

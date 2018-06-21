@@ -19,7 +19,7 @@ import linkBins, {linkPackageBins} from '@pnpm/link-bins'
 
 await linkBins('node_modules', 'node_modules/.bin')
 
-await linkPackageBins('node_modules/some-pkg', 'node_modules/.bin')
+await linkBinsOfPackages([{manifest: packageJson, location: pathToPackage}], 'node_modules/.bin')
 ```
 
 ## License
