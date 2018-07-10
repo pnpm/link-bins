@@ -15,11 +15,12 @@ npm i -S @pnpm/logger @pnpm/link-bins
 ## Usage
 
 ```ts
-import linkBins, {linkPackageBins} from '@pnpm/link-bins'
+import linkBins, {linkBinsOfPackages} from '@pnpm/link-bins'
 
 await linkBins('node_modules', 'node_modules/.bin')
 
-await linkBinsOfPackages([{manifest: packageJson, location: pathToPackage}], 'node_modules/.bin')
+const packages = [{manifest: packageJson, location: pathToPackage}]
+await linkBinsOfPackages(packages, 'node_modules/.bin')
 ```
 
 ## License
