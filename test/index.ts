@@ -17,7 +17,7 @@ test('linkBins()', async (t) => {
 
   await linkBins(path.join(simpleFixture, 'node_modules'), binTarget)
 
-  t.deepEqual(await fs.readdir(binTarget), ['simple'])
+  t.deepEqual(await fs.readdir(binTarget), ['simple', 'simple.ps1'])
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
   const content = await fs.readFile(binLocation, 'utf8')
@@ -39,7 +39,7 @@ test('linkBinsOfPackages()', async (t) => {
     binTarget,
   )
 
-  t.deepEqual(await fs.readdir(binTarget), ['simple'])
+  t.deepEqual(await fs.readdir(binTarget), ['simple', 'simple.ps1'])
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
   const content = await fs.readFile(binLocation, 'utf8')
@@ -53,7 +53,7 @@ test('linkBins() resolves conflicts. Prefer packages that use their name as bin 
 
   await linkBins(path.join(binNameConflictsFixture, 'node_modules'), binTarget)
 
-  t.deepEqual(await fs.readdir(binTarget), ['bar', 'foofoo'])
+  t.deepEqual(await fs.readdir(binTarget), ['bar', 'bar.ps1', 'foofoo', 'foofoo.ps1'])
 
   {
     const binLocation = path.join(binTarget, 'bar')
@@ -92,7 +92,7 @@ test('linkBinsOfPackages() resolves conflicts. Prefer packages that use their na
     binTarget,
   )
 
-  t.deepEqual(await fs.readdir(binTarget), ['bar', 'foofoo'])
+  t.deepEqual(await fs.readdir(binTarget), ['bar', 'bar.ps1', 'foofoo', 'foofoo.ps1'])
 
   {
     const binLocation = path.join(binTarget, 'bar')
