@@ -1,3 +1,4 @@
+///<reference path="../typings/index.d.ts" />
 import linkBins, {
   linkBinsOfPackages,
 } from '@pnpm/link-bins'
@@ -6,10 +7,33 @@ import path = require('path')
 import exists = require('path-exists')
 import tempy = require('tempy')
 import fs = require('mz/fs')
+import isWindows = require('is-windows')
+import pathKey = require('path-key')
 
 const fixtures = path.join(__dirname, 'fixtures')
 const simpleFixture = path.join(fixtures, 'simple-fixture')
 const binNameConflictsFixture = path.join(fixtures, 'bin-name-conflicts')
+
+const POWER_SHELL_IS_SUPPORTED = isPowerShellSupported()
+const IS_WINDOWS = isWindows()
+
+function isPowerShellSupported () {
+  if (isWindows()) return true
+
+  const pathValue = process.env[pathKey()]
+  return pathValue && pathValue.indexOf('pwsh') !== -1
+}
+
+function getExpectedBins (bins: string[]) {
+  const expectedBins = [...bins]
+  if (POWER_SHELL_IS_SUPPORTED) {
+    bins.forEach((bin) => expectedBins.push(`${bin}.ps1`))
+  }
+  if (IS_WINDOWS) {
+    bins.forEach((bin) => expectedBins.push(`${bin}.cmd`))
+  }
+  return expectedBins.sort()
+}
 
 test('linkBins()', async (t) => {
   const binTarget = tempy.directory()
@@ -17,7 +41,7 @@ test('linkBins()', async (t) => {
 
   await linkBins(path.join(simpleFixture, 'node_modules'), binTarget)
 
-  t.deepEqual(await fs.readdir(binTarget), ['simple', 'simple.ps1'])
+  t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['simple']))
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
   const content = await fs.readFile(binLocation, 'utf8')
@@ -39,7 +63,7 @@ test('linkBinsOfPackages()', async (t) => {
     binTarget,
   )
 
-  t.deepEqual(await fs.readdir(binTarget), ['simple', 'simple.ps1'])
+  t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['simple']))
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
   const content = await fs.readFile(binLocation, 'utf8')
@@ -53,7 +77,7 @@ test('linkBins() resolves conflicts. Prefer packages that use their name as bin 
 
   await linkBins(path.join(binNameConflictsFixture, 'node_modules'), binTarget)
 
-  t.deepEqual(await fs.readdir(binTarget), ['bar', 'bar.ps1', 'foofoo', 'foofoo.ps1'])
+  t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['bar', 'foofoo']))
 
   {
     const binLocation = path.join(binTarget, 'bar')
@@ -92,7 +116,7 @@ test('linkBinsOfPackages() resolves conflicts. Prefer packages that use their na
     binTarget,
   )
 
-  t.deepEqual(await fs.readdir(binTarget), ['bar', 'bar.ps1', 'foofoo', 'foofoo.ps1'])
+  t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['bar', 'foofoo']))
 
   {
     const binLocation = path.join(binTarget, 'bar')

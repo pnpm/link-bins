@@ -3,13 +3,24 @@ import binify, {Command} from '@pnpm/package-bins'
 import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
 import {PackageJson} from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
+import isWindows = require('is-windows')
 import mkdirp = require('mkdirp-promise')
 import Module = require('module')
 import fs = require('mz/fs')
 import normalizePath = require('normalize-path')
 import path = require('path')
+import pathKey = require('path-key')
 import R = require('ramda')
 import getPkgDirs from './getPkgDirs'
+
+const POWER_SHELL_IS_SUPPORTED = isPowerShellSupported()
+
+function isPowerShellSupported () {
+  if (isWindows()) return true
+
+  const pathValue = process.env[pathKey()]
+  return pathValue && pathValue.indexOf('pwsh') !== -1
+}
 
 export default async (modules: string, binPath: string, exceptPkgName?: string) => {
   const pkgDirs = await getPkgDirs(modules)
@@ -92,8 +103,12 @@ async function linkBin (cmd: Command, binPath: string) {
   const externalBinPath = path.join(binPath, cmd.name)
 
   const nodePath = (await getBinNodePaths(cmd.path)).join(path.delimiter)
-  return cmdShim(cmd.path, externalBinPath, {nodePath})
+  return cmdShim(cmd.path, externalBinPath, {
+    createPwshFile: POWER_SHELL_IS_SUPPORTED,
+    nodePath,
+  })
 }
+
 async function getBinNodePaths (target: string) {
   const targetRealPath = await fs.realpath(target)
 

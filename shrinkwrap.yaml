@@ -8,10 +8,12 @@ dependencies:
   '@types/ramda': 0.25.34
   '@zkochan/cmd-shim': 3.0.0
   arr-flatten: 1.1.0
+  is-windows: 1.0.2
   mkdirp-promise: 5.0.1
   mz: 2.7.0
   normalize-path: 3.0.0
   p-filter: 1.0.0
+  path-key: 2.0.1
   ramda: 0.25.0
 devDependencies:
   '@pnpm/logger': 1.0.2
@@ -2074,7 +2076,6 @@ packages:
     resolution:
       integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
   /path-key/2.0.1:
-    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -3166,6 +3167,7 @@ specifiers:
   '@types/tempy': ^0.1.0
   '@zkochan/cmd-shim': ^3.0.0
   arr-flatten: ^1.1.0
+  is-windows: ^1.0.2
   mkdirp-promise: ^5.0.1
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
@@ -3174,6 +3176,7 @@ specifiers:
   p-filter: ^1.0.0
   package-preview: ^1.0.1
   path-exists: ^3.0.0
+  path-key: ^2.0.1
   ramda: ^0.25.0
   rimraf: ^2.6.2
   tape: ^4.8.0
