@@ -37,19 +37,18 @@
   },
   "dependencies": {
     "@pnpm/package-bins": "^1.0.0",
+    "@pnpm/read-package-json": "^1.0.0",
     "@pnpm/types": "^1.7.0",
     "@types/mz": "^0.0.32",
     "@types/node": "^9.6.5 || 10",
     "@types/ramda": "^0.25.20",
     "@zkochan/cmd-shim": "^3.0.0",
     "arr-flatten": "^1.1.0",
-    "is-windows": "^1.0.2",
     "mkdirp-promise": "^5.0.1",
     "mz": "^2.7.0",
     "normalize-path": "^3.0.0",
     "p-filter": "^1.0.0",
-    "ramda": "^0.25.0",
-    "read-package-json": "^2.0.13"
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "@pnpm/logger": "^1.0.1",

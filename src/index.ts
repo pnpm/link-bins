@@ -1,18 +1,15 @@
 import logger from '@pnpm/logger'
 import binify, {Command} from '@pnpm/package-bins'
+import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
 import {PackageJson} from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
-import isWindows = require('is-windows')
 import mkdirp = require('mkdirp-promise')
 import Module = require('module')
 import fs = require('mz/fs')
 import normalizePath = require('normalize-path')
 import path = require('path')
 import R = require('ramda')
-import readPackageJson = require('read-package-json')
 import getPkgDirs from './getPkgDirs'
-
-const IS_WINDOWS = isWindows()
 
 export default async (modules: string, binPath: string, exceptPkgName?: string) => {
   const pkgDirs = await getPkgDirs(modules)
@@ -76,7 +73,7 @@ async function linkBins (
 }
 
 async function getPackageBins (target: string) {
-  const pkg = await safeReadPkg(path.join(target, 'package.json'))
+  const pkg = await safeReadPkg(target)
 
   if (!pkg) {
     logger.warn(`There's a directory in node_modules without package.json: ${target}`)
@@ -106,16 +103,13 @@ async function getBinNodePaths (target: string) {
   )
 }
 
-function safeReadPkg (pkgPath: string): Promise<PackageJson | null> {
-  return new Promise((resolve, reject) => {
-    readPackageJson(pkgPath, (err: Error, pkg: PackageJson) => {
-      if (!err) {
-        resolve(pkg)
-      } else if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
-        reject(err)
-      } else {
-        resolve(null)
-      }
-    })
-  })
+async function safeReadPkg (pkgPath: string): Promise<PackageJson | null> {
+  try {
+    return await readPackageJsonFromDir(pkgPath)
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      return null
+    }
+    throw err
+  }
 }
