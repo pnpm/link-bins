@@ -8,21 +8,13 @@ import exists = require('path-exists')
 import tempy = require('tempy')
 import fs = require('mz/fs')
 import isWindows = require('is-windows')
-import pathKey = require('path-key')
 
 const fixtures = path.join(__dirname, 'fixtures')
 const simpleFixture = path.join(fixtures, 'simple-fixture')
 const binNameConflictsFixture = path.join(fixtures, 'bin-name-conflicts')
 
-const POWER_SHELL_IS_SUPPORTED = isPowerShellSupported()
+const POWER_SHELL_IS_SUPPORTED = isWindows()
 const IS_WINDOWS = isWindows()
-
-function isPowerShellSupported () {
-  if (isWindows()) return true
-
-  const pathValue = process.env[pathKey()]
-  return pathValue && pathValue.indexOf('pwsh') !== -1
-}
 
 function getExpectedBins (bins: string[]) {
   const expectedBins = [...bins]

@@ -9,18 +9,10 @@ import Module = require('module')
 import fs = require('mz/fs')
 import normalizePath = require('normalize-path')
 import path = require('path')
-import pathKey = require('path-key')
 import R = require('ramda')
 import getPkgDirs from './getPkgDirs'
 
-const POWER_SHELL_IS_SUPPORTED = isPowerShellSupported()
-
-function isPowerShellSupported () {
-  if (isWindows()) return true
-
-  const pathValue = process.env[pathKey()]
-  return pathValue && pathValue.indexOf('pwsh') !== -1
-}
+const POWER_SHELL_IS_SUPPORTED = isWindows()
 
 export default async (modules: string, binPath: string, exceptPkgName?: string) => {
   const pkgDirs = await getPkgDirs(modules)

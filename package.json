@@ -49,7 +49,6 @@
     "mz": "^2.7.0",
     "normalize-path": "^3.0.0",
     "p-filter": "^1.0.0",
-    "path-key": "^2.0.1",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
