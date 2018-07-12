@@ -14,13 +14,12 @@ import getPkgDirs from './getPkgDirs'
 
 const POWER_SHELL_IS_SUPPORTED = isWindows()
 
-export default async (modules: string, binPath: string, exceptPkgName?: string) => {
+export default async (modules: string, binPath: string) => {
   const pkgDirs = await getPkgDirs(modules)
   const allCmds = R.unnest(
     (await Promise.all(
       pkgDirs
         .map(normalizePath)
-        .filter((pkgDir: string) => !exceptPkgName || !pkgDir.endsWith(`/${exceptPkgName}`))
         .map(getPackageBins),
     ))
     .filter((cmds: Command[]) => cmds.length),
