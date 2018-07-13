@@ -1,4 +1,3 @@
-import logger from '@pnpm/logger'
 import binify, {Command} from '@pnpm/package-bins'
 import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
 import {PackageJson} from '@pnpm/types'
@@ -14,18 +13,24 @@ import getPkgDirs from './getPkgDirs'
 
 const POWER_SHELL_IS_SUPPORTED = isWindows()
 
-export default async (modules: string, binPath: string) => {
-  const pkgDirs = await getPkgDirs(modules)
+export default async (
+  modules: string,
+  binPath: string,
+  opts: {
+    warn: (msg: string) => void,
+  },
+) => {
+  const pkgDirs = await getPkgDirs(modules, opts.warn)
   const allCmds = R.unnest(
     (await Promise.all(
       pkgDirs
         .map(normalizePath)
-        .map(getPackageBins),
+        .map((target: string) => getPackageBins(target, opts.warn)),
     ))
     .filter((cmds: Command[]) => cmds.length),
   )
 
-  return linkBins(allCmds, binPath)
+  return linkBins(allCmds, binPath, opts)
 }
 
 export async function linkBinsOfPackages (
@@ -34,6 +39,9 @@ export async function linkBinsOfPackages (
     location: string,
   }>,
   binsTarget: string,
+  opts: {
+    warn: (msg: string) => void,
+  },
 ) {
   if (!pkgs.length) return
 
@@ -45,7 +53,7 @@ export async function linkBinsOfPackages (
     .filter((cmds: Command[]) => cmds.length),
   )
 
-  return linkBins(allCmds, binsTarget)
+  return linkBins(allCmds, binsTarget, opts)
 }
 
 async function linkBins (
@@ -54,6 +62,9 @@ async function linkBins (
     pkgName: string,
   }>,
   binPath: string,
+  opts: {
+    warn: (msg: string) => void,
+  },
 ) {
   if (!allCmds.length) return
 
@@ -66,7 +77,7 @@ async function linkBins (
   const usedNames = R.fromPairs(cmdsWithOwnName.map((cmd) => [cmd.name, cmd.name] as R.KeyValuePair<string, string>))
   await Promise.all(cmdsWithOtherNames.map((cmd: Command & {pkgName: string}) => {
     if (usedNames[cmd.name]) {
-      logger.warn(`Cannot link bin "${cmd.name}" of "${cmd.pkgName}" to "${binPath}". A package called "${usedNames[cmd.name]}" already has its bin linked.`)
+      opts.warn(`Cannot link bin "${cmd.name}" of "${cmd.pkgName}" to "${binPath}". A package called "${usedNames[cmd.name]}" already has its bin linked.`)
       return
     }
     usedNames[cmd.name] = cmd.pkgName
@@ -74,11 +85,11 @@ async function linkBins (
   }))
 }
 
-async function getPackageBins (target: string) {
+async function getPackageBins (target: string, warn: (msg: string) => void) {
   const pkg = await safeReadPkg(target)
 
   if (!pkg) {
-    logger.warn(`There's a directory in node_modules without package.json: ${target}`)
+    warn(`There's a directory in node_modules without package.json: ${target}`)
     return []
   }
 

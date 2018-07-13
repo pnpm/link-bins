@@ -9,7 +9,7 @@
 ## Installation
 
 ```sh
-npm i -S @pnpm/logger @pnpm/link-bins
+npm i -S @pnpm/link-bins
 ```
 
 ## Usage
@@ -17,10 +17,12 @@ npm i -S @pnpm/logger @pnpm/link-bins
 ```ts
 import linkBins, {linkBinsOfPackages} from '@pnpm/link-bins'
 
-await linkBins('node_modules', 'node_modules/.bin')
+function warn (msg) { console.warn(msg) }
+
+await linkBins('node_modules', 'node_modules/.bin', {warn})
 
 const packages = [{manifest: packageJson, location: pathToPackage}]
-await linkBinsOfPackages(packages, 'node_modules/.bin')
+await linkBinsOfPackages(packages, 'node_modules/.bin', {warn})
 ```
 
 ## License

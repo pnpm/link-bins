@@ -1,20 +1,25 @@
-import logger from '@pnpm/logger'
 import flatten = require('arr-flatten')
 import fs = require('mz/fs')
 import pFilter = require('p-filter')
 import path = require('path')
 
-export default async function (modules: string): Promise<string[]> {
-  const dirs = await getDirectories(modules)
+export default async function (
+  modules: string,
+  warn: (msg: string) => void,
+): Promise<string[]> {
+  const dirs = await getDirectories(modules, warn)
   const subdirs = await Promise.all(
     dirs.map((dir: string): Promise<string[]> => {
-      return isScopedPkgsDir(dir) ? getDirectories(dir) : Promise.resolve([dir])
+      return isScopedPkgsDir(dir) ? getDirectories(dir, warn) : Promise.resolve([dir])
     }),
   )
   return flatten(subdirs)
 }
 
-async function getDirectories (srcPath: string): Promise<string[]> {
+async function getDirectories (
+  srcPath: string,
+  warn: (msg: string) => void,
+): Promise<string[]> {
   let dirs: string[]
   try {
     dirs = await fs.readdir(srcPath)
@@ -34,7 +39,7 @@ async function getDirectories (srcPath: string): Promise<string[]> {
         return stats.isDirectory()
       } catch (err) {
         if (err!.code !== 'ENOENT') throw err
-        logger.warn(`Cannot find file at ${absolutePath} although it was listed by readdir`)
+        warn(`Cannot find file at ${absolutePath} although it was listed by readdir`)
         return false
       }
     },

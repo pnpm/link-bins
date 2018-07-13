@@ -8,6 +8,7 @@ import exists = require('path-exists')
 import tempy = require('tempy')
 import fs = require('mz/fs')
 import isWindows = require('is-windows')
+import sinon = require('sinon')
 
 const fixtures = path.join(__dirname, 'fixtures')
 const simpleFixture = path.join(fixtures, 'simple-fixture')
@@ -30,9 +31,11 @@ function getExpectedBins (bins: string[]) {
 test('linkBins()', async (t) => {
   const binTarget = tempy.directory()
   t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
 
-  await linkBins(path.join(simpleFixture, 'node_modules'), binTarget)
+  await linkBins(path.join(simpleFixture, 'node_modules'), binTarget, {warn})
 
+  t.notOk(warn.called)
   t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['simple']))
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
@@ -44,6 +47,7 @@ test('linkBins()', async (t) => {
 test('linkBinsOfPackages()', async (t) => {
   const binTarget = tempy.directory()
   t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
 
   await linkBinsOfPackages(
     [
@@ -53,8 +57,10 @@ test('linkBinsOfPackages()', async (t) => {
       },
     ],
     binTarget,
+    {warn},
   )
 
+  t.notOk(warn.called)
   t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['simple']))
   const binLocation = path.join(binTarget, 'simple')
   t.ok(await exists(binLocation))
@@ -66,9 +72,11 @@ test('linkBinsOfPackages()', async (t) => {
 test('linkBins() resolves conflicts. Prefer packages that use their name as bin name', async (t) => {
   const binTarget = tempy.directory()
   t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
 
-  await linkBins(path.join(binNameConflictsFixture, 'node_modules'), binTarget)
+  await linkBins(path.join(binNameConflictsFixture, 'node_modules'), binTarget, {warn})
 
+  t.ok(warn.calledWith(`Cannot link bin "bar" of "foo" to "${binTarget}". A package called "bar" already has its bin linked.`))
   t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['bar', 'foofoo']))
 
   {
@@ -91,6 +99,7 @@ test('linkBins() resolves conflicts. Prefer packages that use their name as bin 
 test('linkBinsOfPackages() resolves conflicts. Prefer packages that use their name as bin name', async (t) => {
   const binTarget = tempy.directory()
   t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
 
   const modulesPath = path.join(binNameConflictsFixture, 'node_modules')
 
@@ -106,8 +115,10 @@ test('linkBinsOfPackages() resolves conflicts. Prefer packages that use their na
       },
     ],
     binTarget,
+    {warn},
   )
 
+  t.ok(warn.calledWith(`Cannot link bin "bar" of "foo" to "${binTarget}". A package called "bar" already has its bin linked.`))
   t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['bar', 'foofoo']))
 
   {
