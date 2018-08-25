@@ -104,19 +104,19 @@ async function getPackageBinsFromPackageJson (pkgJson: PackageJson, pkgPath: str
 async function linkBin (cmd: Command, binPath: string) {
   const externalBinPath = path.join(binPath, cmd.name)
 
-  const nodePath = (await getBinNodePaths(cmd.path)).join(path.delimiter)
+  const nodePath = await getBinNodePaths(cmd.path)
   return cmdShim(cmd.path, externalBinPath, {
     createPwshFile: POWER_SHELL_IS_SUPPORTED,
     nodePath,
   })
 }
 
-async function getBinNodePaths (target: string) {
+async function getBinNodePaths (target: string): Promise<string[]> {
   const targetRealPath = await fs.realpath(target)
 
   return R.union(
-    Module['_nodeModulePaths'](targetRealPath), // tslint:disable-line:no-string-literal
-    Module['_nodeModulePaths'](target), // tslint:disable-line:no-string-literal
+    Module._nodeModulePaths(targetRealPath),
+    Module._nodeModulePaths(target),
   )
 }
 

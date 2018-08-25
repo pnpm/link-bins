@@ -5,7 +5,7 @@ dependencies:
   '@types/mz': 0.0.32
   '@types/node': 10.5.4
   '@types/ramda': 0.25.35
-  '@zkochan/cmd-shim': 3.0.1
+  '@zkochan/cmd-shim': 3.1.0
   arr-flatten: 1.1.0
   is-windows: 1.0.2
   mkdirp-promise: 5.0.1
@@ -140,7 +140,7 @@ packages:
     dev: true
     resolution:
       integrity: sha1-TPO97s9S8vasjzKw2IpoLrSEiXk=
-  /@zkochan/cmd-shim/3.0.1:
+  /@zkochan/cmd-shim/3.1.0:
     dependencies:
       is-windows: 1.0.2
       mkdirp-promise: 5.0.1
@@ -149,7 +149,7 @@ packages:
     engines:
       node: '>=6'
     resolution:
-      integrity: sha512-bwKWp1qPnbUuZJDc81AeSLWguW8rY3uiCSDb+bev4ODm6zBfL77vV0bNvCAB3+Tovq5o2hMZEAhzFAmHg8sARA==
+      integrity: sha512-o8l0+x7C7sMZU3v9GuJIAU10qQLtwR1dtRQIOmlNMtyaqhmpXOzx1HWiYoWfmmf9HHZoAkXpc9TM9PQYF9d4Jg==
   /acorn/3.0.4:
     dev: true
     engines:
@@ -3190,7 +3190,7 @@ packages:
     resolution:
       integrity: sha1-5a2ryKz0CPY4X8dklWhMiOavaJo=
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 8
+shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   '@pnpm/package-bins': ^1.0.0
@@ -3203,7 +3203,7 @@ specifiers:
   '@types/sinon': ^5.0.1
   '@types/tape': ^4.2.31
   '@types/tempy': ^0.1.0
-  '@zkochan/cmd-shim': ^3.0.0
+  '@zkochan/cmd-shim': ^3.1.0
   arr-flatten: ^1.1.0
   is-windows: ^1.0.2
   mkdirp-promise: ^5.0.1

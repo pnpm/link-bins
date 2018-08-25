@@ -8,11 +8,6 @@ declare module 'p-filter' {
   export = anything;
 }
 
-declare module '@zkochan/cmd-shim' {
-  const anything: any;
-  export = anything;
-}
-
 declare module 'normalize-path' {
   const anything: any;
   export = anything;
@@ -31,4 +26,8 @@ declare module 'read-package-json' {
 declare module 'is-windows' {
   function isWindows(): boolean;
   export = isWindows;
+}
+
+declare namespace NodeJS.Module {
+  function _nodeModulePaths(from: string): string[]
 }
