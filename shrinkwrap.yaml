@@ -1,9 +1,9 @@
 dependencies:
   '@pnpm/package-bins': 1.0.0
-  '@pnpm/read-package-json': 1.0.0
-  '@pnpm/types': 1.8.0
+  '@pnpm/read-package-json': 1.0.1
+  '@pnpm/types': 2.0.0
   '@types/mz': 0.0.32
-  '@types/node': 10.11.7
+  '@types/node': 10.12.0
   '@types/ramda': 0.25.39
   '@zkochan/cmd-shim': 3.1.0
   arr-flatten: 1.1.0
@@ -34,7 +34,7 @@ packages:
     dependencies:
       '@pnpm/self-installer': 2.0.5
       '@types/got': 8.3.4
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
       command-exists: 1.2.8
       cross-spawn: 6.0.5
     dev: true
@@ -53,16 +53,17 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-ZqVfIXK3r5AsP5VAhPHrhf3isF+T4yEuUpJTF9T03oFTJ9LBnkKvx8F7P7biKEManxSGOkSpNoIBdsura9pY5Q==
-  /@pnpm/read-package-json/1.0.0:
+      tarball: 'http://registry.npmjs.org/@pnpm/package-bins/-/package-bins-1.0.0.tgz'
+  /@pnpm/read-package-json/1.0.1:
     dependencies:
-      '@pnpm/types': 1.8.0
+      '@pnpm/types': 2.0.0
       read-package-json: 2.0.13
       util.promisify: 1.0.0
     dev: false
     engines:
       node: '>=6'
     resolution:
-      integrity: sha512-G2bs2KRL84eJggkUYxDpI8RA0xFKR4tNqvHy6bGF8fDIzNtkp17nOgEMIcA2ShSwUX80gQ8BpBh6ix5KKF46tw==
+      integrity: sha512-2ZUZ9v6V88ZMliGCV+qP2/mhUCj5IWjfkocS594RbMQ50ThbfWsagU1GRIE1EsXvQI4MBCjiRivXDw9fCHKe1Q==
   /@pnpm/self-installer/2.0.5:
     dev: true
     engines:
@@ -73,6 +74,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-NsEzBVa5aMgn/n79piyJtpUQFzJ97tB2R2r8PSJlLnMA6LJmchKuv7ATN+/nZH/3QRd/+uFXEq07/i/ajsqVGQ==
+  /@pnpm/types/2.0.0:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-jBLjrZjafStD0DFjnsiiGVXclkLieRPjfg6fyHI1rGvvACMPOW/sNweFBCxKI7B2o7U5mdjVX3OgKPnhXx70zw==
   /@sinonjs/commons/1.0.2:
     dependencies:
       type-detect: 4.0.8
@@ -97,13 +104,13 @@ packages:
       integrity: sha512-ZwTHAlC9akprWDinwEPD4kOuwaYZlyMwVJIANsKNC3QVp0AHB04m7RnB4eqeWfgmxw8MGTzS9uMaw93Z3QcZbw==
   /@types/fs-extra/5.0.4:
     dependencies:
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
     dev: true
     resolution:
       integrity: sha512-DsknoBvD8s+RFfSGjmERJ7ZOP1HI0UZRA3FSI+Zakhrc/Gy26YQsLI+m5V5DHxroHRJqCDLKJp7Hixn8zyaF7g==
   /@types/got/8.3.4:
     dependencies:
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
     dev: true
     resolution:
       integrity: sha512-0AbIQzpqQafYPFg26nwg5PfNgPLYwHeTP6z5F1u+5oypLIdpx34o5r8wYTTj3X3YYF2yPHtZPO/KYwlI8Nu/hQ==
@@ -113,12 +120,12 @@ packages:
       integrity: sha512-NrH6jPlV77QCVPhAHofWeiOr77TgpKt82c2RVxSBChWBJqyY/u4ngl3CA4mcsAg/w7rNLrkR7dkObMV0ihLLXw==
   /@types/mz/0.0.32:
     dependencies:
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
     resolution:
       integrity: sha512-cy3yebKhrHuOcrJGkfwNHhpTXQLgmXSv1BX+4p32j+VUQ6aP2eJ5cL7OvGcAQx75fCTFaAIIAKewvqL+iwSd4g==
-  /@types/node/10.11.7:
+  /@types/node/10.12.0:
     resolution:
-      integrity: sha512-yOxFfkN9xUFLyvWaeYj90mlqTJ41CsQzWKS3gXdOMOyPVacUsymejKxJ4/pMW7exouubuEeZLJawGgcNGYlTeg==
+      integrity: sha512-3TUHC3jsBAB7qVRGxT6lWyYo2v96BMmD2PTcl47H25Lu7UXtFH/2qqmKiVrnel6Ne//0TFYf6uvNX+HW2FRkLQ==
   /@types/path-exists/3.0.0:
     dev: true
     resolution:
@@ -133,7 +140,7 @@ packages:
       integrity: sha512-Wnuv66VhvAD2LEJfZkq8jowXGxe+gjVibeLCYcVBp7QLdw0BFx2sRkKzoiiDkYEPGg5VyqO805Rcj0stVjQwCQ==
   /@types/tape/4.2.32:
     dependencies:
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
     dev: true
     resolution:
       integrity: sha512-xil0KO5wkPoixdBWGIGolPv9dekf6dVkjjJLAFYchfKcd4DICou67rgGCIO7wAh3i5Ff/6j9IDgZz+GU9cMaqQ==
@@ -551,6 +558,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-MIvur/3ygRkFHvodkyITyRuPkuc=
+      tarball: 'http://registry.npmjs.org/camelcase-keys/-/camelcase-keys-2.1.0.tgz'
   /camelcase-keys/4.2.0:
     dependencies:
       camelcase: 4.1.0
@@ -1570,6 +1578,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-cstmi0JSKCkKu/qFaJJYcwioAfs=
+      tarball: 'http://registry.npmjs.org/meow/-/meow-3.7.0.tgz'
   /meow/4.0.1:
     dependencies:
       camelcase-keys: 4.2.0
@@ -1885,7 +1894,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
-  /nise/1.4.5:
+  /nise/1.4.6:
     dependencies:
       '@sinonjs/formatio': 3.0.0
       just-extend: 3.0.0
@@ -1894,7 +1903,7 @@ packages:
       text-encoding: 0.6.4
     dev: true
     resolution:
-      integrity: sha512-OHRVvdxKgwZELf2DTgsJEIA4MOq8XWvpSUzoOXyxJ2mY0mMENWC66+70AShLR2z05B1dzrzWlUQJmJERlOUpZw==
+      integrity: sha512-1GedetLKzmqmgwabuMSqPsT7oumdR77SBpDfNNJhADRIeA3LN/2RVqR4fFqwvzhAqcTef6PPCzQwITE/YQ8S8A==
   /node-status-codes/1.0.0:
     dev: true
     engines:
@@ -2046,7 +2055,7 @@ packages:
       '@types/fs-extra': 5.0.4
       '@types/load-json-file': 2.0.7
       '@types/mz': 0.0.32
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
       '@types/write-json-file': 2.2.1
       cross-spawn: 6.0.5
       find-down: 0.1.4
@@ -2585,7 +2594,7 @@ packages:
       diff: 3.5.0
       lodash.get: 4.4.2
       lolex: 3.0.0
-      nise: 1.4.5
+      nise: 1.4.6
       supports-color: 5.5.0
       type-detect: 4.0.8
     dev: true
@@ -2806,7 +2815,7 @@ packages:
   /symlink-dir/1.1.3:
     dependencies:
       '@types/mz': 0.0.32
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
       graceful-fs: 4.1.11
       is-windows: 1.0.2
       mkdirp-promise: 5.0.1
@@ -3087,7 +3096,7 @@ packages:
       integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
   /unpack-stream/3.0.3:
     dependencies:
-      '@types/node': 10.11.7
+      '@types/node': 10.12.0
       decompress-maybe: 1.0.0
       ssri: 5.3.0
       tar-fs: 1.16.3
@@ -3163,6 +3172,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-DAnIXCqUaD0Nfq+O4JfVZL8OEFw=
+      tarball: 'http://registry.npmjs.org/widest-line/-/widest-line-1.0.0.tgz'
   /wrappy/1.0.2:
     resolution:
       integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
@@ -3248,7 +3258,7 @@ shrinkwrapVersion: 3
 specifiers:
   '@pnpm/package-bins': ^1.0.0
   '@pnpm/read-package-json': ^1.0.0
-  '@pnpm/types': ^1.7.0
+  '@pnpm/types': ^2.0.0
   '@types/mz': ^0.0.32
   '@types/node': ^9.6.5 || 10
   '@types/path-exists': ^3.0.0
