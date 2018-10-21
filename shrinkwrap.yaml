@@ -1,5 +1,5 @@
 dependencies:
-  '@pnpm/package-bins': 1.0.0
+  '@pnpm/package-bins': 2.0.0
   '@pnpm/read-package-json': 1.0.1
   '@pnpm/types': 2.0.0
   '@types/mz': 0.0.32
@@ -42,18 +42,17 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1zLmh6tRftQXfZ1IFHq1IexP0KaJhN6pSCA/IzK+Vixn4hPvxwcIbGjKW0KH9hsHSmrPpmSit2EWj7jGNgfa6Q==
-  /@pnpm/package-bins/1.0.0:
+  /@pnpm/package-bins/2.0.0:
     dependencies:
-      '@pnpm/types': 1.8.0
+      '@pnpm/types': 2.0.0
       '@types/mz': 0.0.32
       mz: 2.7.0
       p-filter: 1.0.0
     dev: false
     engines:
-      node: '>=4'
+      node: '>=6'
     resolution:
-      integrity: sha512-ZqVfIXK3r5AsP5VAhPHrhf3isF+T4yEuUpJTF9T03oFTJ9LBnkKvx8F7P7biKEManxSGOkSpNoIBdsura9pY5Q==
-      tarball: 'http://registry.npmjs.org/@pnpm/package-bins/-/package-bins-1.0.0.tgz'
+      integrity: sha512-Zftgs0jJ3O4RXajViGe/JfVNpIB5I3I2np2YH5UOvVeMuxPVEB/MwHNOJpAtSQWj5p7KAXGj1OhVxtQFrDTdhQ==
   /@pnpm/read-package-json/1.0.1:
     dependencies:
       '@pnpm/types': 2.0.0
@@ -70,10 +69,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-NnkmxKFQJMkHL2TcLAl2sof7mVu8dgode4zGzwtvEaZ/xjOHm3CfUJomincmZcpWoXrjHkvbPxjczEPP41Wmqg==
-  /@pnpm/types/1.8.0:
-    dev: false
-    resolution:
-      integrity: sha512-NsEzBVa5aMgn/n79piyJtpUQFzJ97tB2R2r8PSJlLnMA6LJmchKuv7ATN+/nZH/3QRd/+uFXEq07/i/ajsqVGQ==
   /@pnpm/types/2.0.0:
     dev: false
     engines:
@@ -3256,7 +3251,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  '@pnpm/package-bins': ^1.0.0
+  '@pnpm/package-bins': ^2.0.0
   '@pnpm/read-package-json': ^1.0.0
   '@pnpm/types': ^2.0.0
   '@types/mz': ^0.0.32
