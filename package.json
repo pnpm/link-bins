@@ -46,7 +46,7 @@
     "mz": "^2.7.0",
     "normalize-path": "^3.0.0",
     "p-filter": "^1.0.0",
-    "ramda": "^0.25.0"
+    "ramda": "^0.26.0"
   },
   "devDependencies": {
     "@types/path-exists": "^3.0.0",
