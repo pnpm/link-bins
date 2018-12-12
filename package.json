@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@types/path-exists": "^3.0.0",
-    "@types/sinon": "^5.0.1",
+    "@types/sinon": "^7.0.0",
     "@types/tape": "^4.2.31",
     "@types/tempy": "^0.2.0",
     "mos": "^2.0.0-alpha.3",
