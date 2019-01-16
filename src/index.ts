@@ -11,7 +11,9 @@ import path = require('path')
 import R = require('ramda')
 import getPkgDirs from './getPkgDirs'
 
-const POWER_SHELL_IS_SUPPORTED = isWindows()
+const IS_WINDOWS = isWindows()
+const EXECUTABLE_SHEBANG_SUPPORTED = !IS_WINDOWS
+const POWER_SHELL_IS_SUPPORTED = IS_WINDOWS
 
 export default async (
   modules: string,
@@ -104,6 +106,9 @@ async function getPackageBinsFromPackageJson (pkgJson: PackageJson, pkgPath: str
 async function linkBin (cmd: Command, binPath: string) {
   const externalBinPath = path.join(binPath, cmd.name)
 
+  if (EXECUTABLE_SHEBANG_SUPPORTED) {
+    await fs.chmod(cmd.path, 0o755)
+  }
   const nodePath = await getBinNodePaths(cmd.path)
   return cmdShim(cmd.path, externalBinPath, {
     createPwshFile: POWER_SHELL_IS_SUPPORTED,

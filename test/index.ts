@@ -10,12 +10,15 @@ import fs = require('mz/fs')
 import isWindows = require('is-windows')
 import sinon = require('sinon')
 
-const fixtures = path.join(__dirname, 'fixtures')
+// The fixtures directory is copied to fixtures_for_testing before the tests run
+// This happens because the tests conver some of the files into executables
+const fixtures = path.join(__dirname, 'fixtures_for_testing')
 const simpleFixture = path.join(fixtures, 'simple-fixture')
 const binNameConflictsFixture = path.join(fixtures, 'bin-name-conflicts')
 
 const POWER_SHELL_IS_SUPPORTED = isWindows()
 const IS_WINDOWS = isWindows()
+const EXECUTABLE_SHEBANG_SUPPORTED = !IS_WINDOWS
 
 function getExpectedBins (bins: string[]) {
   const expectedBins = [...bins]
@@ -41,6 +44,14 @@ test('linkBins()', async (t) => {
   t.ok(await exists(binLocation))
   const content = await fs.readFile(binLocation, 'utf8')
   t.ok(content.includes('node_modules/simple/index.js'))
+
+  if (EXECUTABLE_SHEBANG_SUPPORTED) {
+    const binFile = path.join(binTarget, 'simple')
+    const stat = await fs.stat(binFile)
+    t.equal(stat.mode, parseInt('100755', 8), `${binFile} is executable`)
+    t.ok(stat.isFile(), `${binFile} refers to a file`)
+  }
+
   t.end()
 })
 

@@ -18,3 +18,5 @@ lib
 .vscode/
 
 .store
+
+test/fixtures_for_testing

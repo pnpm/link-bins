@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "tslint -c tslint.json --project .",
     "tsc": "rimraf lib && tsc",
-    "test": "npm run lint && preview && ts-node test --type-check && mos t",
+    "test": "npm run lint && preview && ncp test/fixtures test/fixtures_for_testing && ts-node test --type-check && rimraf test/fixtures_for_testing && mos t",
     "md": "mos",
     "prepublishOnly": "npm run tsc",
     "fix": "tslint -c tslint.json --project . --fix"
@@ -55,6 +55,7 @@
     "@types/tempy": "^0.2.0",
     "mos": "^2.0.0-alpha.3",
     "mos-plugin-readme": "^1.0.4",
+    "ncp": "^2.0.0",
     "package-preview": "^2.0.0",
     "path-exists": "^3.0.0",
     "rimraf": "^2.6.2",

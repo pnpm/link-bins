@@ -20,6 +20,7 @@ devDependencies:
   '@types/tempy': 0.2.0
   mos: 2.0.0-alpha.3
   mos-plugin-readme: 1.0.4
+  ncp: 2.0.0
   package-preview: 2.0.0
   path-exists: 3.0.0
   rimraf: 2.6.3
@@ -1868,6 +1869,11 @@ packages:
       thenify-all: 1.6.0
     resolution:
       integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==
+  /ncp/2.0.0:
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha1-GVoh1sRuNh0vsSgbo4uR6d9727M=
   /next-path/1.0.0:
     dev: true
     engines:
@@ -3236,6 +3242,7 @@ specifiers:
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
   mz: ^2.7.0
+  ncp: ^2.0.0
   normalize-path: ^3.0.0
   p-filter: ^1.0.0
   package-preview: ^2.0.0
