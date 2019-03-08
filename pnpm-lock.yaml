@@ -1,7 +1,7 @@
 dependencies:
-  '@pnpm/package-bins': 2.0.0
-  '@pnpm/read-package-json': 1.1.1
-  '@pnpm/types': 2.0.0
+  '@pnpm/package-bins': 3.0.0
+  '@pnpm/read-package-json': 2.0.0
+  '@pnpm/types': 3.0.0
   '@types/mz': 0.0.32
   '@types/node': 10.12.30
   '@types/ramda': 0.26.0
@@ -44,39 +44,39 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1zLmh6tRftQXfZ1IFHq1IexP0KaJhN6pSCA/IzK+Vixn4hPvxwcIbGjKW0KH9hsHSmrPpmSit2EWj7jGNgfa6Q==
-  /@pnpm/package-bins/2.0.0:
+  /@pnpm/package-bins/3.0.0:
     dependencies:
-      '@pnpm/types': 2.0.0
+      '@pnpm/types': 3.0.0
       '@types/mz': 0.0.32
       mz: 2.7.0
       p-filter: 1.0.0
     dev: false
     engines:
-      node: '>=6'
+      node: '>=8'
     resolution:
-      integrity: sha512-Zftgs0jJ3O4RXajViGe/JfVNpIB5I3I2np2YH5UOvVeMuxPVEB/MwHNOJpAtSQWj5p7KAXGj1OhVxtQFrDTdhQ==
-  /@pnpm/read-package-json/1.1.1:
+      integrity: sha512-j6lW7MKpKveB1CDcUQjU/5yR3zKkVDMhT3i/jd3n+JWbvdErPac9MquN/p1kxqa6crsezJ7pziNqbdvKWvSOHg==
+  /@pnpm/read-package-json/2.0.0:
     dependencies:
-      '@pnpm/types': 2.0.0
+      '@pnpm/types': 3.0.0
       read-package-json: 2.0.13
       util.promisify: 1.0.0
     dev: false
     engines:
-      node: '>=6'
+      node: '>=8'
     resolution:
-      integrity: sha512-x4nte9ex/SQ2oxFQ/fi5/Hgx692qt7pmqneePh4q+7CNs1Hv6Xn8kM7REerGGSdQQD+2xu54fmHxVMVcgW6gxQ==
+      integrity: sha512-I38F0ccCa/icXtoe15ha/t0pYmtp0M4NUbP79z7FtZZ3lXUWSx7THsfBVU5AbgZandiCVZLIOFqsxzDdFlQL0g==
   /@pnpm/self-installer/2.0.7:
     dev: true
     engines:
       node: '>=4'
     resolution:
       integrity: sha512-FGKMmjqP0S+E1n9M6BcsVVkOVB0NfhBzXGZK6bLmerRT3EOvQ09KY++hBXoq0+/TqCvbsth6ER+EO0i46uJttQ==
-  /@pnpm/types/2.0.0:
+  /@pnpm/types/3.0.0:
     dev: false
     engines:
-      node: '>=6'
+      node: '>=8'
     resolution:
-      integrity: sha512-jBLjrZjafStD0DFjnsiiGVXclkLieRPjfg6fyHI1rGvvACMPOW/sNweFBCxKI7B2o7U5mdjVX3OgKPnhXx70zw==
+      integrity: sha512-YPqAUqoleOgbPhPK+hKIb7IHzKPCok2Kype/DBfJqenzvZjsR0V+uwZMS1FHcCKzSgn8g0J+y2q+g6yjJsAN0g==
   /@sinonjs/commons/1.4.0:
     dependencies:
       type-detect: 4.0.8
@@ -3211,9 +3211,9 @@ packages:
     resolution:
       integrity: sha512-+Wo/p5VRfxUgBUGy2j/6KX2mj9AYJWOHuhMjMcbBFc3y54o9/4buK1ksBvuiK01C3kby8DH9lSmJdSxw+4G/2Q==
 specifiers:
-  '@pnpm/package-bins': ^2.0.0
-  '@pnpm/read-package-json': ^1.0.0
-  '@pnpm/types': ^2.0.0
+  '@pnpm/package-bins': ^3.0.0
+  '@pnpm/read-package-json': ^2.0.0
+  '@pnpm/types': ^3.0.0
   '@types/mz': ^0.0.32
   '@types/node': ^9.6.5 || 10
   '@types/path-exists': ^3.0.0
