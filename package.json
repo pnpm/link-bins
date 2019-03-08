@@ -35,7 +35,7 @@
   "dependencies": {
     "@pnpm/package-bins": "^2.0.0",
     "@pnpm/read-package-json": "^1.0.0",
-    "@pnpm/types": "^2.0.0",
+    "@pnpm/types": "^3.0.0",
     "@types/mz": "^0.0.32",
     "@types/node": "^9.6.5 || 10",
     "@types/ramda": "^0.26.0",
