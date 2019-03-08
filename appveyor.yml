@@ -1,9 +1,10 @@
 environment:
   matrix:
-    - nodejs_version: 6
+    - nodejs_version: 8
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm set fetch-retry-maxtimeout 180000
+  - set PNPM_VERSION=next
   - curl -L https://unpkg.com/@pnpm/self-installer | node
   - pnpm install
 matrix:
