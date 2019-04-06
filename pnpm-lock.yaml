@@ -7,6 +7,7 @@ dependencies:
   '@types/ramda': 0.26.6
   '@zkochan/cmd-shim': 3.1.0
   arr-flatten: 1.1.0
+  is-subdir: 1.0.3
   is-windows: 1.0.2
   mkdirp-promise: 5.0.1
   mz: 2.7.0
@@ -447,6 +448,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ccav/yGvoa80BQDljCxsmmQ3Xvx60/UpBIij5QN21W3wBi/hhIC9OoO+KLpu9IJTS9j4DRVJ3aDDF9cMSoa2lw==
+  /better-path-resolve/1.0.0:
+    dependencies:
+      is-windows: 1.0.2
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-pbnl5XzGBdrFU/wT4jqmJVPn2B6UHPBOhzMQkY/SPUPB6QtUXtmBHBIwCbXJol93mOpGMnQyP/+BB19q04xj7g==
   /bl/3.0.0:
     dependencies:
       readable-stream: 3.3.0
@@ -1320,6 +1329,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
+  /is-subdir/1.0.3:
+    dependencies:
+      better-path-resolve: 1.0.0
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-1mu7zN6mOCnPKvYJrZZaER7Z43Qz0VD+3ZCTlORxGQ+VECpAx6FPf1xuB4gWI3ovhQ3Lkx9BIUOg2RM6qQSvvQ==
   /is-symbol/1.0.2:
     dependencies:
       has-symbols: 1.0.0
@@ -3227,6 +3244,7 @@ specifiers:
   '@types/tempy': ^0.2.0
   '@zkochan/cmd-shim': ^3.1.0
   arr-flatten: ^1.1.0
+  is-subdir: ^1.0.3
   is-windows: ^1.0.2
   mkdirp-promise: ^5.0.1
   mos: ^2.0.0-alpha.3

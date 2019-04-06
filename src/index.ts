@@ -2,6 +2,7 @@ import binify, {Command} from '@pnpm/package-bins'
 import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
 import {PackageJson} from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
+import isSubdir = require('is-subdir')
 import isWindows = require('is-windows')
 import mkdirp = require('mkdirp-promise')
 import Module = require('module')
@@ -26,6 +27,7 @@ export default async (
   const allCmds = R.unnest(
     (await Promise.all(
       pkgDirs
+        .filter((dir) => !isSubdir(dir, binPath)) // Don't link own bins
         .map(normalizePath)
         .map((target: string) => getPackageBins(target, opts.warn)),
     ))

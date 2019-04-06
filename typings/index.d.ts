@@ -28,6 +28,16 @@ declare module 'is-windows' {
   export = isWindows;
 }
 
+declare module 'is-subdir' {
+  function isSubdir(base: string, sub: string): boolean;
+  export = isSubdir;
+}
+
 declare namespace NodeJS.Module {
   function _nodeModulePaths(from: string): string[]
+}
+
+declare module 'ncp' {
+  const anything: any;
+  export = anything;
 }

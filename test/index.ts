@@ -9,12 +9,17 @@ import tempy = require('tempy')
 import fs = require('mz/fs')
 import isWindows = require('is-windows')
 import sinon = require('sinon')
+import ncpcb = require('ncp')
+import { promisify } from 'util'
+
+const ncp = promisify(ncpcb)
 
 // The fixtures directory is copied to fixtures_for_testing before the tests run
 // This happens because the tests conver some of the files into executables
 const fixtures = path.join(__dirname, 'fixtures_for_testing')
 const simpleFixture = path.join(fixtures, 'simple-fixture')
 const binNameConflictsFixture = path.join(fixtures, 'bin-name-conflicts')
+const foobarFixture = path.join(fixtures, 'foobar')
 
 const POWER_SHELL_IS_SUPPORTED = isWindows()
 const IS_WINDOWS = isWindows()
@@ -51,6 +56,22 @@ test('linkBins()', async (t) => {
     t.equal(stat.mode, parseInt('100755', 8), `${binFile} is executable`)
     t.ok(stat.isFile(), `${binFile} refers to a file`)
   }
+
+  t.end()
+})
+
+test('linkBins() does not link own bins', async (t) => {
+  const target = tempy.directory()
+  await ncp(foobarFixture, target)
+
+  const warn = sinon.spy()
+  const modules = path.join(target, 'node_modules')
+  const binTarget = path.join(target, 'node_modules', 'foo', 'node_modules', '.bin')
+
+  await linkBins(modules, binTarget, { warn })
+
+  t.notOk(warn.called)
+  t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['bar']))
 
   t.end()
 })
