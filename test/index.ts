@@ -20,6 +20,7 @@ const fixtures = path.join(__dirname, 'fixtures_for_testing')
 const simpleFixture = path.join(fixtures, 'simple-fixture')
 const binNameConflictsFixture = path.join(fixtures, 'bin-name-conflicts')
 const foobarFixture = path.join(fixtures, 'foobar')
+const exoticManifestFixture = path.join(fixtures, 'exotic-manifest')
 
 const POWER_SHELL_IS_SUPPORTED = isWindows()
 const IS_WINDOWS = isWindows()
@@ -42,6 +43,33 @@ test('linkBins()', async (t) => {
   const warn = sinon.spy()
 
   await linkBins(path.join(simpleFixture, 'node_modules'), binTarget, {warn})
+
+  t.notOk(warn.called)
+  t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['simple']))
+  const binLocation = path.join(binTarget, 'simple')
+  t.ok(await exists(binLocation))
+  const content = await fs.readFile(binLocation, 'utf8')
+  t.ok(content.includes('node_modules/simple/index.js'))
+
+  if (EXECUTABLE_SHEBANG_SUPPORTED) {
+    const binFile = path.join(binTarget, 'simple')
+    const stat = await fs.stat(binFile)
+    t.equal(stat.mode, parseInt('100755', 8), `${binFile} is executable`)
+    t.ok(stat.isFile(), `${binFile} refers to a file`)
+  }
+
+  t.end()
+})
+
+test('linkBins() finds exotic manifests', async (t) => {
+  const binTarget = tempy.directory()
+  t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
+
+  await linkBins(path.join(exoticManifestFixture, 'node_modules'), binTarget, {
+    allowExoticManifests: true,
+    warn,
+  })
 
   t.notOk(warn.called)
   t.deepEqual(await fs.readdir(binTarget), getExpectedBins(['simple']))

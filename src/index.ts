@@ -1,4 +1,5 @@
 import binify, {Command} from '@pnpm/package-bins'
+import { readImporterManifestOnly } from '@pnpm/read-importer-manifest'
 import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
 import {DependencyManifest} from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
@@ -20,16 +21,21 @@ export default async (
   modules: string,
   binPath: string,
   opts: {
+    allowExoticManifests?: boolean,
     warn: (msg: string) => void,
   },
 ) => {
   const pkgDirs = await getPkgDirs(modules, opts.warn)
+  const pkgBinOpts = {
+    allowExoticManifests: false,
+    ...opts,
+  }
   const allCmds = R.unnest(
     (await Promise.all(
       pkgDirs
         .filter((dir) => !isSubdir(dir, binPath)) // Don't link own bins
         .map(normalizePath)
-        .map((target: string) => getPackageBins(target, opts.warn)),
+        .map((target: string) => getPackageBins(target, pkgBinOpts)),
     ))
     .filter((cmds: Command[]) => cmds.length),
   )
@@ -89,11 +95,17 @@ async function linkBins (
   }))
 }
 
-async function getPackageBins (target: string, warn: (msg: string) => void) {
-  const pkg = await safeReadPkg(target)
+async function getPackageBins (
+  target: string,
+  opts: {
+    allowExoticManifests: boolean,
+    warn: (msg: string) => void,
+  },
+) {
+  const pkg = opts.allowExoticManifests ? await safeReadImporterManifestOnly(target) : await safeReadPkg(target)
 
   if (!pkg) {
-    warn(`There's a directory in node_modules without package.json: ${target}`)
+    opts.warn(`There's a directory in node_modules without package.json: ${target}`)
     return []
   }
 
@@ -130,6 +142,17 @@ async function getBinNodePaths (target: string): Promise<string[]> {
 async function safeReadPkg (pkgPath: string): Promise<DependencyManifest | null> {
   try {
     return await readPackageJsonFromDir(pkgPath) as DependencyManifest
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      return null
+    }
+    throw err
+  }
+}
+
+async function safeReadImporterManifestOnly (importerDir: string) {
+  try {
+    return await readImporterManifestOnly(importerDir) as DependencyManifest
   } catch (err) {
     if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
       return null
