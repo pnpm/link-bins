@@ -1,6 +1,6 @@
 import binify, {Command} from '@pnpm/package-bins'
 import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
-import {PackageJson} from '@pnpm/types'
+import {DependencyManifest} from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
 import isSubdir = require('is-subdir')
 import isWindows = require('is-windows')
@@ -39,7 +39,7 @@ export default async (
 
 export async function linkBinsOfPackages (
   pkgs: Array<{
-    manifest: PackageJson,
+    manifest: DependencyManifest,
     location: string,
   }>,
   binsTarget: string,
@@ -100,7 +100,7 @@ async function getPackageBins (target: string, warn: (msg: string) => void) {
   return getPackageBinsFromPackageJson(pkg, target)
 }
 
-async function getPackageBinsFromPackageJson (pkgJson: PackageJson, pkgPath: string) {
+async function getPackageBinsFromPackageJson (pkgJson: DependencyManifest, pkgPath: string) {
   const cmds = await binify(pkgJson, pkgPath)
   return cmds.map((cmd) => ({...cmd, ownName: cmd.name === pkgJson.name, pkgName: pkgJson.name}))
 }
@@ -127,9 +127,9 @@ async function getBinNodePaths (target: string): Promise<string[]> {
   )
 }
 
-async function safeReadPkg (pkgPath: string): Promise<PackageJson | null> {
+async function safeReadPkg (pkgPath: string): Promise<DependencyManifest | null> {
   try {
-    return await readPackageJsonFromDir(pkgPath)
+    return await readPackageJsonFromDir(pkgPath) as DependencyManifest
   } catch (err) {
     if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
       return null

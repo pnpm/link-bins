@@ -9,7 +9,7 @@
 ## Installation
 
 ```sh
-npm i -S @pnpm/link-bins
+<pnpm|yarn|npm> add @pnpm/link-bins
 ```
 
 ## Usage
