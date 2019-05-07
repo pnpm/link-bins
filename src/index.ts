@@ -154,7 +154,7 @@ async function safeReadImporterManifestOnly (importerDir: string) {
   try {
     return await readImporterManifestOnly(importerDir) as DependencyManifest
   } catch (err) {
-    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+    if ((err as NodeJS.ErrnoException).code === 'ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND') {
       return null
     }
     throw err

@@ -88,6 +88,38 @@ test('linkBins() finds exotic manifests', async (t) => {
   t.end()
 })
 
+test('linkBins() do not fail on directory w/o manifest file', async (t) => {
+  const binTarget = tempy.directory()
+  t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
+
+  await linkBins(path.join(fixtures, 'dir-with-no-manifest/node_modules'), binTarget, {
+    allowExoticManifests: false,
+    warn,
+  })
+
+  t.ok(warn.called)
+  t.ok(warn.calledWithMatch(sinon.match(/There's a directory in node_modules without package.json:/)))
+
+  t.end()
+})
+
+test('linkBins() with exotic manifests do not fail on directory w/o manifest file', async (t) => {
+  const binTarget = tempy.directory()
+  t.comment(`linking bins to ${binTarget}`)
+  const warn = sinon.spy()
+
+  await linkBins(path.join(fixtures, 'dir-with-no-manifest/node_modules'), binTarget, {
+    allowExoticManifests: true,
+    warn,
+  })
+
+  t.ok(warn.called)
+  t.ok(warn.calledWithMatch(sinon.match(/There's a directory in node_modules without package.json:/)))
+
+  t.end()
+})
+
 test('linkBins() does not link own bins', async (t) => {
   const target = tempy.directory()
   await ncp(foobarFixture, target)
