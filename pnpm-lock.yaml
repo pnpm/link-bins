@@ -3,7 +3,7 @@ dependencies:
   '@pnpm/read-importer-manifest': 1.0.3
   '@pnpm/read-package-json': 2.0.2
   '@pnpm/types': 3.2.0
-  '@zkochan/cmd-shim': 3.1.0
+  '@zkochan/cmd-shim': 4.0.0
   arr-flatten: 1.1.0
   is-subdir: 1.0.3
   is-windows: 1.0.2
@@ -29,7 +29,7 @@ devDependencies:
   tape: 4.10.2
   tempy: 0.3.0
   ts-node: 8.2.0_typescript@3.5.1
-  tslint: 5.16.0_typescript@3.5.1
+  tslint: 5.17.0_typescript@3.5.1
   typescript: 3.5.1
 lockfileVersion: 5
 packages:
@@ -198,16 +198,16 @@ packages:
     dev: true
     resolution:
       integrity: sha1-TPO97s9S8vasjzKw2IpoLrSEiXk=
-  /@zkochan/cmd-shim/3.1.0:
+  /@zkochan/cmd-shim/4.0.0:
     dependencies:
       is-windows: 1.0.2
-      mkdirp-promise: 5.0.1
+      make-dir: 3.0.0
       mz: 2.7.0
     dev: false
     engines:
-      node: '>=6'
+      node: '>=8.15'
     resolution:
-      integrity: sha512-o8l0+x7C7sMZU3v9GuJIAU10qQLtwR1dtRQIOmlNMtyaqhmpXOzx1HWiYoWfmmf9HHZoAkXpc9TM9PQYF9d4Jg==
+      integrity: sha512-arKvaBZJbmnQyvb+4i7PZvLbgiogqv7UF6eSEAxa+HGCHvFdKSq4hPEbvD1GIyGeya6sBK04yBoKg7cfZ4yP9g==
   /acorn/3.0.4:
     dev: true
     engines:
@@ -1694,14 +1694,6 @@ packages:
   /minimist/1.2.0:
     resolution:
       integrity: sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
-  /mkdirp-promise/5.0.1:
-    dependencies:
-      mkdirp: 0.5.1
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha1-6bj2jlUsaKnBcTuEiD96HdA5uKE=
   /mkdirp/0.5.1:
     dependencies:
       minimist: 0.0.8
@@ -3090,7 +3082,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
-  /tslint/5.16.0_typescript@3.5.1:
+  /tslint/5.17.0_typescript@3.5.1:
     dependencies:
       '@babel/code-frame': 7.0.0
       builtin-modules: 1.1.1
@@ -3113,7 +3105,7 @@ packages:
     peerDependencies:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev'
     resolution:
-      integrity: sha512-UxG2yNxJ5pgGwmMzPMYh/CCnCnh0HfPgtlVRDs1ykZklufFBL1ZoTlWFRz2NQjcoEiDoRp+JyT0lhBbbH/obyA==
+      integrity: sha512-pflx87WfVoYepTet3xLfDOLDm9Jqi61UXIKePOuca0qoAZyrGWonDG9VTbji58Fy+8gciUn8Bt7y69+KEVjc/w==
   /tsutils/2.29.0_typescript@3.5.1:
     dependencies:
       tslib: 1.9.3
@@ -3386,7 +3378,7 @@ specifiers:
   '@types/ramda': ^0.26.0
   '@types/sinon': ^7.0.0
   '@types/tape': ^4.2.31
-  '@zkochan/cmd-shim': ^3.1.0
+  '@zkochan/cmd-shim': ^4.0.0
   arr-flatten: ^1.1.0
   is-subdir: ^1.0.3
   is-windows: ^1.0.2
