@@ -1,7 +1,7 @@
-import binify, {Command} from '@pnpm/package-bins'
+import binify, { Command } from '@pnpm/package-bins'
 import { readImporterManifestOnly } from '@pnpm/read-importer-manifest'
-import {fromDir as readPackageJsonFromDir} from '@pnpm/read-package-json'
-import {DependencyManifest} from '@pnpm/types'
+import { fromDir as readPackageJsonFromDir } from '@pnpm/read-package-json'
+import { DependencyManifest } from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
 import isSubdir = require('is-subdir')
 import isWindows = require('is-windows')

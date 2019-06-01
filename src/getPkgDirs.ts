@@ -25,7 +25,7 @@ async function getDirectories (srcPath: string): Promise<string[]> {
   }
   return pFilter(
     dirs
-      .filter((relativePath) => relativePath[0] !== '.') // ignore directories like .bin, .store, etc
+      .filter((relativePath) => !relativePath.startsWith('.')) // ignore directories like .bin, .store, etc
       .map((relativePath) => path.join(srcPath, relativePath)),
     async (absolutePath: string) => {
       try {
@@ -43,5 +43,5 @@ async function getDirectories (srcPath: string): Promise<string[]> {
 }
 
 function isScopedPkgsDir (dirPath: string) {
-  return path.basename(dirPath)[0] === '@'
+  return path.basename(dirPath).startsWith('@')
 }
