@@ -98,9 +98,7 @@ test('linkBins() do not fail on directory w/o manifest file', async (t) => {
     warn,
   })
 
-  t.ok(warn.called)
-  t.ok(warn.calledWithMatch(sinon.match(/There's a directory in node_modules without package.json:/)))
-
+  t.notOk(warn.called)
   t.end()
 })
 
@@ -114,9 +112,7 @@ test('linkBins() with exotic manifests do not fail on directory w/o manifest fil
     warn,
   })
 
-  t.ok(warn.called)
-  t.ok(warn.calledWithMatch(sinon.match(/There's a directory in node_modules without package.json:/)))
-
+  t.notOk(warn.called)
   t.end()
 })
 

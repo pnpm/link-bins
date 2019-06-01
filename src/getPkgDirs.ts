@@ -3,23 +3,17 @@ import fs = require('mz/fs')
 import pFilter = require('p-filter')
 import path = require('path')
 
-export default async function (
-  modules: string,
-  warn: (msg: string) => void,
-): Promise<string[]> {
-  const dirs = await getDirectories(modules, warn)
+export default async function (modules: string): Promise<string[]> {
+  const dirs = await getDirectories(modules)
   const subdirs = await Promise.all(
     dirs.map((dir: string): Promise<string[]> => {
-      return isScopedPkgsDir(dir) ? getDirectories(dir, warn) : Promise.resolve([dir])
+      return isScopedPkgsDir(dir) ? getDirectories(dir) : Promise.resolve([dir])
     }),
   )
   return flatten(subdirs)
 }
 
-async function getDirectories (
-  srcPath: string,
-  warn: (msg: string) => void,
-): Promise<string[]> {
+async function getDirectories (srcPath: string): Promise<string[]> {
   let dirs: string[]
   try {
     dirs = await fs.readdir(srcPath)
@@ -39,7 +33,9 @@ async function getDirectories (
         return stats.isDirectory()
       } catch (err) {
         if (err!.code !== 'ENOENT') throw err
-        warn(`Cannot find file at ${absolutePath} although it was listed by readdir`)
+        // Cannot find file at ${absolutePath} although it was listed by readdir.
+        // This probably means that the target of the symlink does not exist (broken symlink).
+        // This used to be a warning but it didn't really cause any issues.
         return false
       }
     },

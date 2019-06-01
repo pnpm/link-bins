@@ -25,7 +25,7 @@ export default async (
     warn: (msg: string) => void,
   },
 ) => {
-  const pkgDirs = await getPkgDirs(modules, opts.warn)
+  const pkgDirs = await getPkgDirs(modules)
   const pkgBinOpts = {
     allowExoticManifests: false,
     ...opts,
@@ -99,13 +99,13 @@ async function getPackageBins (
   target: string,
   opts: {
     allowExoticManifests: boolean,
-    warn: (msg: string) => void,
   },
 ) {
   const pkg = opts.allowExoticManifests ? await safeReadImporterManifestOnly(target) : await safeReadPkg(target)
 
   if (!pkg) {
-    opts.warn(`There's a directory in node_modules without package.json: ${target}`)
+    // There's a directory in node_modules without package.json: ${target}.
+    // This used to be a warning but it didn't really cause any issues.
     return []
   }
 
