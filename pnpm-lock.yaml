@@ -3,7 +3,7 @@ dependencies:
   '@pnpm/read-importer-manifest': 1.0.8
   '@pnpm/read-package-json': 2.0.3
   '@pnpm/types': 3.2.0
-  '@zkochan/cmd-shim': 4.0.0
+  '@zkochan/cmd-shim': 4.1.0
   arr-flatten: 1.1.0
   is-subdir: 1.0.3
   is-windows: 1.0.2
@@ -15,8 +15,7 @@ dependencies:
 devDependencies:
   '@types/mz': 0.0.32
   '@types/node': 12.7.2
-  '@types/path-exists': 3.0.0
-  '@types/ramda': 0.26.19_typescript@3.5.3
+  '@types/ramda': 0.26.21_typescript@3.5.3
   '@types/sinon': 7.0.13
   '@types/tape': 4.2.33
   mos: 2.0.0-alpha.3
@@ -178,18 +177,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-dyYO+f6ihZEtNPDcWNR1fkoTDf3zAK3lAABDze3mz6POyIercH0lEUawUFXlG8xaQZmm1yEBON/4TsYv/laDYg==
-  /@types/path-exists/3.0.0:
-    dev: true
-    resolution:
-      integrity: sha512-ApUp/Eo/D4lQ/8yI+dlNVz1LslAdvycBbKmsr77sw2Ovymyj0nYowS+xuTChzfGdnEdcqBTPM2OtKmvTFKIXPA==
-  /@types/ramda/0.26.19_typescript@3.5.3:
+  /@types/ramda/0.26.21_typescript@3.5.3:
     dependencies:
-      ts-toolbelt: 3.8.4_typescript@3.5.3
+      ts-toolbelt: 3.8.16_typescript@3.5.3
     dev: true
     peerDependencies:
       typescript: '*'
     resolution:
-      integrity: sha512-lJuMZDXqZ8W2hl0Gz+wEPUhXcf/tZRuaO5vrxFD3Dv2XMqgTZVw+bvfS6iQAsio9XQV+uhkggtT4eLhDmUpI5g==
+      integrity: sha512-zMYtIZMceA6BvH+or6LmewLBgojbXg5+FGCwjO8K+Z+d/ZWxILmhhASXkehW0PqJL+V0QbyDeeAHix0dvEKXfQ==
   /@types/sinon/7.0.13:
     dev: true
     resolution:
@@ -207,16 +202,15 @@ packages:
     dev: true
     resolution:
       integrity: sha1-TPO97s9S8vasjzKw2IpoLrSEiXk=
-  /@zkochan/cmd-shim/4.0.0:
+  /@zkochan/cmd-shim/4.1.0:
     dependencies:
       is-windows: 1.0.2
       make-dir: 3.0.0
-      mz: 2.7.0
     dev: false
     engines:
       node: '>=8.15'
     resolution:
-      integrity: sha512-arKvaBZJbmnQyvb+4i7PZvLbgiogqv7UF6eSEAxa+HGCHvFdKSq4hPEbvD1GIyGeya6sBK04yBoKg7cfZ4yP9g==
+      integrity: sha512-7IznHnYyicROFuyGonUJABuU8MQBqWGNMw9CF5jxrkkPQKmRBD4iZPvOJENPHtYVIUTTu60poyEoxyLQM2yeww==
   /acorn/3.0.4:
     dev: true
     engines:
@@ -3118,14 +3112,14 @@ packages:
       typescript: '>=2.0'
     resolution:
       integrity: sha512-dyNS/RqyVTDcmNM4NIBAeDMpsAdaQ+ojdf0GOLqE6nwJOgzEkdRNzJywhDfwnuvB10oa6NLVG1rUJQCpRN7qoQ==
-  /ts-toolbelt/3.8.4_typescript@3.5.3:
+  /ts-toolbelt/3.8.16_typescript@3.5.3:
     dependencies:
       typescript: 3.5.3
     dev: true
     peerDependencies:
       typescript: ^3.5.0
     resolution:
-      integrity: sha512-JdM3qMor3jrJqtTDiOktBUsMG8GVwrN3NJA/cXlFWW7pcxwDRk0IATF5Co1hSykCphmVZ/aUWBdmhZvxgwBXhw==
+      integrity: sha512-bMymH0SWHbReBzXtsfILYPemRpxzY6hANCI0toxMYz3VizXKesru2+5SS2wDenkSPMkehSm8DiMay+KxzRXX1A==
   /tslib/1.10.0:
     dev: true
     resolution:
@@ -3416,17 +3410,16 @@ packages:
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 specifiers:
-  '@pnpm/package-bins': ^3.1.0
-  '@pnpm/read-importer-manifest': ^1.0.0
-  '@pnpm/read-package-json': ^2.0.0
-  '@pnpm/types': ^3.0.0
+  '@pnpm/package-bins': ^3.1.1
+  '@pnpm/read-importer-manifest': ^1.0.8
+  '@pnpm/read-package-json': ^2.0.3
+  '@pnpm/types': ^3.2.0
   '@types/mz': ^0.0.32
-  '@types/node': '12'
-  '@types/path-exists': ^3.0.0
-  '@types/ramda': ^0.26.0
-  '@types/sinon': ^7.0.0
-  '@types/tape': ^4.2.31
-  '@zkochan/cmd-shim': ^4.0.0
+  '@types/node': ^12.7.2
+  '@types/ramda': ^0.26.21
+  '@types/sinon': ^7.0.13
+  '@types/tape': ^4.2.33
+  '@zkochan/cmd-shim': ^4.1.0
   arr-flatten: ^1.1.0
   is-subdir: ^1.0.3
   is-windows: ^1.0.2
@@ -3436,14 +3429,14 @@ specifiers:
   mz: ^2.7.0
   ncp: ^2.0.0
   normalize-path: ^3.0.0
-  p-filter: ^2.0.0
+  p-filter: ^2.1.0
   package-preview: ^2.0.0
   path-exists: ^4.0.0
-  ramda: ^0.26.0
+  ramda: ^0.26.1
   rimraf: ^3.0.0
-  sinon: ^7.0.0
-  tape: ^4.8.0
+  sinon: ^7.4.1
+  tape: ^4.11.0
   tempy: ^0.3.0
-  ts-node: ^8.0.0
-  tslint: ^5.8.0
-  typescript: ^3.0.0
+  ts-node: ^8.3.0
+  tslint: ^5.19.0
+  typescript: ^3.5.3
