@@ -1,8 +1,8 @@
 dependencies:
-  '@pnpm/package-bins': 3.1.1
+  '@pnpm/package-bins': 4.0.0
   '@pnpm/read-importer-manifest': 2.0.0
   '@pnpm/read-package-json': 3.0.0
-  '@pnpm/types': 3.2.0
+  '@pnpm/types': 4.0.0
   '@zkochan/cmd-shim': 4.2.0
   arr-flatten: 1.1.0
   is-subdir: 1.0.3
@@ -62,16 +62,16 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1zLmh6tRftQXfZ1IFHq1IexP0KaJhN6pSCA/IzK+Vixn4hPvxwcIbGjKW0KH9hsHSmrPpmSit2EWj7jGNgfa6Q==
-  /@pnpm/package-bins/3.1.1:
+  /@pnpm/package-bins/4.0.0:
     dependencies:
-      '@pnpm/types': 3.2.0
+      '@pnpm/types': 4.0.0
       graceful-fs: 4.2.2
       p-filter: 2.1.0
     dev: false
     engines:
-      node: '>=8.15'
+      node: '>=10'
     resolution:
-      integrity: sha512-Iy3BEPXFBS1uaEhohjI2nLOXgGoACiyDEBPscY0myizk4fapOxyALCc5ysfLhFXa8lm6n7jMQdadVfahXDwgCw==
+      integrity: sha512-/u2nIuEOZm53lUg3rxnq+S4zA0oXmZ579xs0qFyn5F5lTAUPEQwX5PwAHo817teT+MjSKtxRPv9FUcB2tcmeDQ==
   /@pnpm/read-importer-manifest/2.0.0:
     dependencies:
       '@pnpm/error': 1.0.0
@@ -106,12 +106,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-UWyBrgXm4fKIsdVLBj4cABn1Kf0ZjPqs9WjAWMimbwdokzd3ByzggJeRnY1bnBuGFHSNAhHZBcciVP8w3PkDzQ==
-  /@pnpm/types/3.2.0:
-    dev: false
-    engines:
-      node: '>=8.15'
-    resolution:
-      integrity: sha512-YuP9SY+txLd6oEVdE082EmtDE3XXknIKtMTH5UoWus2YkqArS2VXA89n6aoAQ3n0hq7txBiT4SNVyyJHGnBGGA==
   /@pnpm/types/4.0.0:
     dev: false
     engines:
@@ -1878,7 +1872,7 @@ packages:
       magic-hook: 1.0.0
       mos-core: 1.0.2
       mos-read-pkg-up: 1.0.0
-      normalize-path: 2.1.1
+      normalize-path: 2.0.1
       remi: 1.1.1
       remi-runner: 1.1.3
     dev: true
@@ -2019,14 +2013,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-R4hqwWYnYNQmG32XnSQXCdPOP3o=
-  /normalize-path/2.1.1:
-    dependencies:
-      remove-trailing-separator: 1.1.0
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-GrKLVW4Zg2Oowab35vogE3/mrtk=
   /normalize-path/3.0.0:
     dev: false
     engines:
@@ -2454,7 +2440,7 @@ packages:
       integrity: sha1-nLxoaXj+5l0WwA4rGcI3/Pbjg4k=
   /read-yaml-file/1.1.0:
     dependencies:
-      graceful-fs: 4.2.2
+      graceful-fs: 4.2.1
       js-yaml: 3.13.1
       pify: 4.0.1
       strip-bom: 3.0.0
@@ -2544,10 +2530,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-Rxt5AU16SWvboB0BihJvj3ctiMY=
-  /remove-trailing-separator/1.1.0:
-    dev: true
-    resolution:
-      integrity: sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
   /repeat-string/1.6.1:
     dev: true
     engines:
@@ -3437,10 +3419,10 @@ packages:
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 specifiers:
-  '@pnpm/package-bins': ^3.1.1
+  '@pnpm/package-bins': ^4.0.0
   '@pnpm/read-importer-manifest': ^2.0.0
   '@pnpm/read-package-json': ^3.0.0
-  '@pnpm/types': ^3.2.0
+  '@pnpm/types': ^4.0.0
   '@types/mz': ^0.0.32
   '@types/node': ^12.7.2
   '@types/ramda': ^0.26.21
