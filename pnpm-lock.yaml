@@ -1,7 +1,7 @@
 dependencies:
   '@pnpm/package-bins': 3.1.1
   '@pnpm/read-importer-manifest': 2.0.0
-  '@pnpm/read-package-json': 2.0.3
+  '@pnpm/read-package-json': 3.0.0
   '@pnpm/types': 3.2.0
   '@zkochan/cmd-shim': 4.2.0
   arr-flatten: 1.1.0
@@ -91,15 +91,15 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-CGwxGahVhx0upg4OCgQ062SzegtWrXkw6xJoxdiVgMkGtSU+xgxv09v9wWKLWadnnq54rmUVxWTFBcG1YLz4rQ==
-  /@pnpm/read-package-json/2.0.3:
+  /@pnpm/read-package-json/3.0.0:
     dependencies:
-      '@pnpm/types': 3.2.0
+      '@pnpm/types': 4.0.0
       read-package-json: 2.1.0
     dev: false
     engines:
-      node: '>=8.15'
+      node: '>=10'
     resolution:
-      integrity: sha512-rPUEWrQ+DZ+FJf6iF/7AA/q71bua1ak77qWiO8eZScD0Aib5rbmmsjIHUArgIOwbTx5q6l2gOsNtvFBnCvq9/g==
+      integrity: sha512-8PqdjPslNqoCcv15vivjG+Mzpwe2tDBnDDjhj7fIbY1CgsNWrM2F1k3f1T5V05CloJOnAsD4A2JTSuSNzkkxvA==
   /@pnpm/self-installer/2.0.8:
     dev: true
     engines:
@@ -3439,7 +3439,7 @@ packages:
 specifiers:
   '@pnpm/package-bins': ^3.1.1
   '@pnpm/read-importer-manifest': ^2.0.0
-  '@pnpm/read-package-json': ^2.0.3
+  '@pnpm/read-package-json': ^3.0.0
   '@pnpm/types': ^3.2.0
   '@types/mz': ^0.0.32
   '@types/node': ^12.7.2

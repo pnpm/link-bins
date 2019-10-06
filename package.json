@@ -35,7 +35,7 @@
   "dependencies": {
     "@pnpm/package-bins": "^3.1.1",
     "@pnpm/read-importer-manifest": "^2.0.0",
-    "@pnpm/read-package-json": "^2.0.3",
+    "@pnpm/read-package-json": "^3.0.0",
     "@pnpm/types": "^3.2.0",
     "@zkochan/cmd-shim": "^4.1.0",
     "arr-flatten": "^1.1.0",
