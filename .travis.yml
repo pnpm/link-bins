@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-  - 8
   - 10
   - 12
 sudo: false
@@ -9,6 +8,6 @@ before_install:
 install:
   - pnpm install
 script:
-  - npm test
+  - pnpm test
 notifications:
   email: false
