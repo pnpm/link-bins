@@ -35,16 +35,15 @@
   "dependencies": {
     "@pnpm/package-bins": "^4.0.0",
     "@pnpm/read-importer-manifest": "^2.0.0",
+    "@pnpm/read-modules-dir": "^2.0.1",
     "@pnpm/read-package-json": "^3.0.0",
     "@pnpm/types": "^4.0.0",
     "@zkochan/cmd-shim": "^4.1.0",
-    "arr-flatten": "^1.1.0",
     "is-subdir": "^1.0.3",
     "is-windows": "^1.0.2",
     "make-dir": "^3.0.0",
     "mz": "^2.7.0",
     "normalize-path": "^3.0.0",
-    "p-filter": "^2.1.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import binify, { Command } from '@pnpm/package-bins'
 import { readImporterManifestOnly } from '@pnpm/read-importer-manifest'
+import readModulesDir from '@pnpm/read-modules-dir'
 import { fromDir as readPackageJsonFromDir } from '@pnpm/read-package-json'
 import { DependencyManifest } from '@pnpm/types'
 import cmdShim = require('@zkochan/cmd-shim')
@@ -11,7 +12,6 @@ import fs = require('mz/fs')
 import normalizePath = require('normalize-path')
 import path = require('path')
 import R = require('ramda')
-import getPkgDirs from './getPkgDirs'
 
 const IS_WINDOWS = isWindows()
 const EXECUTABLE_SHEBANG_SUPPORTED = !IS_WINDOWS
@@ -25,7 +25,9 @@ export default async (
     warn: (msg: string) => void,
   },
 ) => {
-  const pkgDirs = await getPkgDirs(modules)
+  const pkgDirs = await readModulesDir(modules)
+  // If the modules dir does not exist, do nothing
+  if (pkgDirs === null) return
   const pkgBinOpts = {
     allowExoticManifests: false,
     ...opts,
@@ -33,6 +35,7 @@ export default async (
   const allCmds = R.unnest(
     (await Promise.all(
       pkgDirs
+        .map((dir) => path.resolve(modules, dir))
         .filter((dir) => !isSubdir(dir, binPath)) // Don't link own bins
         .map(normalizePath)
         .map((target: string) => getPackageBins(target, pkgBinOpts)),
