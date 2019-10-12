@@ -10,6 +10,7 @@ import makeDir = require('make-dir')
 import Module = require('module')
 import fs = require('mz/fs')
 import normalizePath = require('normalize-path')
+import pSettle = require('p-settle')
 import path = require('path')
 import R = require('ramda')
 
@@ -85,10 +86,10 @@ async function linkBins (
 
   const [cmdsWithOwnName, cmdsWithOtherNames] = R.partition((cmd) => cmd.ownName, allCmds)
 
-  await Promise.all(cmdsWithOwnName.map((cmd: Command) => linkBin(cmd, binPath)))
+  const results1 = await pSettle(cmdsWithOwnName.map((cmd: Command) => linkBin(cmd, binPath)))
 
   const usedNames = R.fromPairs(cmdsWithOwnName.map((cmd) => [cmd.name, cmd.name] as R.KeyValuePair<string, string>))
-  await Promise.all(cmdsWithOtherNames.map((cmd: Command & {pkgName: string}) => {
+  const results2 = await pSettle(cmdsWithOtherNames.map((cmd: Command & {pkgName: string}) => {
     if (usedNames[cmd.name]) {
       opts.warn(`Cannot link bin "${cmd.name}" of "${cmd.pkgName}" to "${binPath}". A package called "${usedNames[cmd.name]}" already has its bin linked.`)
       return
@@ -96,6 +97,13 @@ async function linkBins (
     usedNames[cmd.name] = cmd.pkgName
     return linkBin(cmd, binPath)
   }))
+
+  // We want to create all commands that we can create before throwing an exception
+  for (const result of [...results1, ...results2]) {
+    if (result.isRejected) {
+      throw result.reason
+    }
+  }
 }
 
 async function getPackageBins (
