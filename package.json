@@ -48,7 +48,7 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "@types/mz": "^0.0.32",
+    "@types/mz": "^2.0.0",
     "@types/node": "^12.7.2",
     "@types/ramda": "^0.26.21",
     "@types/sinon": "^7.0.13",
