@@ -1,3 +1,5 @@
+> Moved to the [pnpm monorepo](https://github.com/pnpm/pnpm)
+
 # @pnpm/link-bins
 
 > Link bins to node_modules/.bin
